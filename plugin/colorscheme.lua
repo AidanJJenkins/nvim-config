@@ -1,0 +1,14 @@
+-- local material = require 'material'
+-- local colors = require 'material.colors'
+--
+-- material.setup{
+--     -- Custom colors must be a function that takes in the default colors table as
+--     -- a paramter, and then modifies them.
+--     -- To see the available colors, see lua/material/colors/init.lua
+--     custom_colors = function(colors)
+--         --colors.editor.bg = "#100c0c"
+--         colors.editor.bg = "#0f0f0f"
+--     end
+-- }
+--
+-- vim.g.material_style = "deep ocean"
