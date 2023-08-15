@@ -23,7 +23,7 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
-
+  'ThePrimeagen/vim-be-good',
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -77,44 +77,7 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
 
-  -- {
-  --    -- npc theme
-  --   'catppuccin/nvim',
-  --     priority = 1000,
-  --      config = function()
-  --   require("catppuccin").setup({
-  --     flavour = "mocha", -- latte, frappe, macchiato, mocha
-  --     term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
-  --     color_overrides = {
-  --     --     mocha = {
-  --     --       base = "#000000",
-  --     --       mantle = "#000000",
-  --     --       crust = "#000000",
-		-- 		  -- },
-  --         mocha = {
-  --           base = "#080808",
-  --           mantle = "#080808",
-  --           crust = "#080808",
-		-- 		  },
-  --       },
-  --     custom_highlights = {},
-  --     integration_default = nil, -- set to true/false to enable/disable integrations by default
-  --     integrations = {
-  --         cmp = true,
-  --         gitsigns = true,
-  --         nvimtree = true,
-  --         treesitter = true,
-  --         notify = false,
-  --         mini = false,
-  --         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-  --     },
-  -- })
-  -- vim.cmd.colorscheme "catppuccin"
-  -- end,
-  -- },
-
   {
-    --'for when you wanna feel like the primagen',
     'rose-pine/neovim',
      priority = 1000,
       config = function()
@@ -135,13 +98,13 @@ require('lazy').setup({
     },
 
    -- {
-   --   -- for when you wanna look like a clown
    --   'EdenEast/nightfox.nvim',
    --    priority = 1000,
    --     config = function()
    --     local palettes = {
    --       carbonfox = {
-   --        bg1 = "#121212",
+   --        bg1 = "#080808",
+   --        -- bg1 = "#121212",
    --       },
    --     }
    --     local specs = {
@@ -151,14 +114,15 @@ require('lazy').setup({
    --         }
    --       }
    --     }
-   -- 
+   --
    --     require('nightfox').setup({
    --       palettes = palettes,
    --       specs = specs,
    --    })
    --       vim.cmd.colorscheme 'carbonfox'
    --     end,
-   --   },
+     --},
+  { "tjdevries/colorbuddy.nvim", dev = false },
 
   {
     -- Set lualine as statusline
@@ -174,16 +138,7 @@ require('lazy').setup({
     },
   },
 
-  -- {
-  --   -- Add indentation guides even on blank lines
-  --   'lukas-reineke/indent-blankline.nvim',
-  --   -- Enable `lukas-reineke/indent-blankline.nvim`
-  --   -- See `:help indent_blankline.txt`
-  --   opts = {
-  --     char = '┊',
-  --     show_trailing_blankline_indent = false,
-  --   },
-  -- },
+  -- {'lukas-reineke/indent-blankline.nvim'},
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
@@ -235,12 +190,15 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
+-- vim.cmd("colorscheme citruszest")
+-- vim.opt.list = true
+-- vim.opt.listchars:append "eol:↴"
 
 -- Set highlight on search
 vim.o.hlsearch = false
 
 -- Cursor always a block
---vim.cmd([[set guicursor+=i:block]])
+-- vim.cmd([[set guicursor+=i:block]])
 
 -- Make line numbers default
 vim.wo.number = true
@@ -318,7 +276,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-
 -- Harpoon keymaps
 vim.keymap.set('n', '<leader>ad', require("harpoon.mark").add_file, { desc = 'add files to harpoon' })
 vim.keymap.set('n', '<leader>hh', require("harpoon.ui").toggle_quick_menu, { desc = 'toggle harpoon menu' })
@@ -367,7 +324,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'javascript', 'c', 'cpp', 'dockerfile', 'go', 'lua', 'python', 'rust', 'sql',  'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'ocaml', 'javascript', 'c', 'cpp', 'dockerfile', 'go', 'lua', 'python', 'rust', 'sql',  'tsx', 'typescript', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
