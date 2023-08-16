@@ -77,51 +77,10 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
 
-  {
-    'rose-pine/neovim',
-     priority = 1000,
-      config = function()
-      require('rose-pine').setup({
-        variant = 'auto',
-        dark_variant = 'main',
-        bold_vert_split = false,
-        dim_nc_background = false,
-        disable_background = false,
-        disable_float_background = false,
-        disable_italics = false,
-        groups = {
-	  	    background = '#080808',
-        }
-      })
-        vim.cmd.colorscheme 'rose-pine'
-      end,
-    },
-
-   -- {
-   --   'EdenEast/nightfox.nvim',
-   --    priority = 1000,
-   --     config = function()
-   --     local palettes = {
-   --       carbonfox = {
-   --        bg1 = "#080808",
-   --        -- bg1 = "#121212",
-   --       },
-   --     }
-   --     local specs = {
-   --       carbonfox = {
-   --         syntax = {
-   --           string = "#66ffbf"
-   --         }
-   --       }
-   --     }
-   --
-   --     require('nightfox').setup({
-   --       palettes = palettes,
-   --       specs = specs,
-   --    })
-   --       vim.cmd.colorscheme 'carbonfox'
-   --     end,
-     --},
+  -- color schemes
+  { 'rose-pine/neovim', name = "rose-pine", lazy = false, priority = 1000 },
+  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+  { 'EdenEast/nightfox.nvim',name = "carbonfox", lazy = false, priority = 1000, },
   { "tjdevries/colorbuddy.nvim", dev = false },
 
   {
@@ -190,15 +149,9 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
--- vim.cmd("colorscheme citruszest")
--- vim.opt.list = true
--- vim.opt.listchars:append "eol:↴"
 
 -- Set highlight on search
 vim.o.hlsearch = false
-
--- Cursor always a block
--- vim.cmd([[set guicursor+=i:block]])
 
 -- Make line numbers default
 vim.wo.number = true
@@ -258,13 +211,6 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- custom colors for nightfox
--- local override = require('nightfox').override
--- override.palettes({
---   carbonfox = {
---   },
--- })
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -275,116 +221,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-
--- Harpoon keymaps
-vim.keymap.set('n', '<leader>ad', require("harpoon.mark").add_file, { desc = 'add files to harpoon' })
-vim.keymap.set('n', '<leader>hh', require("harpoon.ui").toggle_quick_menu, { desc = 'toggle harpoon menu' })
-vim.keymap.set('n', '<leader>nf', require("harpoon.ui").nav_next, { desc = 'go to next file' })
-vim.keymap.set('n', '<leader>pf', require("harpoon.ui").nav_prev, { desc = 'go to prev file' })
-vim.keymap.set('n', '<leader>1', function() require("harpoon.ui").nav_file(1) end, { desc = 'go to file 1' })
-vim.keymap.set('n', '<leader>2', function() require("harpoon.ui").nav_file(2) end, { desc = 'go to file 2' })
-vim.keymap.set('n', '<leader>3', function() require("harpoon.ui").nav_file(3) end, { desc = 'go to file 3' })
-vim.keymap.set('n', '<leader>4', function() require("harpoon.ui").nav_file(4) end, { desc = 'go to file 4' })
-
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
-
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer' })
-
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-
--- [[ Configure Treesitter ]]
--- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'ocaml', 'javascript', 'c', 'cpp', 'dockerfile', 'go', 'lua', 'python', 'rust', 'sql',  'tsx', 'typescript', 'vimdoc', 'vim' },
-
-  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
-
-  highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<M-space>',
-    },
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<leader>a'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
-      },
-    },
-  },
-}
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -479,58 +315,6 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
     }
   end,
-}
-
--- Auto format on save
-require("lsp-format").setup {}
-require("lspconfig").gopls.setup { on_attach = require("lsp-format").on_attach }
-
--- [[ Configure nvim-cmp ]]
--- See `:help cmp`
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-require('luasnip.loaders.from_vscode').lazy_load()
-luasnip.config.setup {}
-
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

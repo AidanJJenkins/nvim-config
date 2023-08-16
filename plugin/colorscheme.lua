@@ -1,14 +1,35 @@
--- local material = require 'material'
--- local colors = require 'material.colors'
+-- vim.cmd("colorscheme citruszest")
+vim.cmd("colorscheme moonfly")
+
+-- require('rose-pine').setup({
+--   variant = 'auto',
+--   dark_variant = 'main',
+--   bold_vert_split = false,
+--   dim_nc_background = false,
+--   disable_background = false,
+--   disable_float_background = false,
+--   disable_italics = false,
+--   groups = {
+--               background = '#080808',
+--   }
+-- })
+-- vim.cmd.colorscheme 'rose-pine'
+--  local palettes = {
+--    carbonfox = {
+--     bg1 = "#080808",
+--     -- bg1 = "#121212",
+--    },
+--  }
+--  local specs = {
+--    carbonfox = {
+--      syntax = {
+--        string = "#66ffbf"
+--      }
+--    }
+--  }
 --
--- material.setup{
---     -- Custom colors must be a function that takes in the default colors table as
---     -- a paramter, and then modifies them.
---     -- To see the available colors, see lua/material/colors/init.lua
---     custom_colors = function(colors)
---         --colors.editor.bg = "#100c0c"
---         colors.editor.bg = "#0f0f0f"
---     end
--- }
---
--- vim.g.material_style = "deep ocean"
+--  require('nightfox').setup({
+--    palettes = palettes,
+--    specs = specs,
+-- })
+-- vim.cmd.colorscheme 'carbonfox'
