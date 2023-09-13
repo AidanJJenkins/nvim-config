@@ -23,10 +23,14 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
+  'lewis6991/gitsigns.nvim',
   'ThePrimeagen/vim-be-good',
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+
+  --for some colorschemes
+  'rktjmp/lush.nvim',
 
   -- Auto format
   'lukas-reineke/lsp-format.nvim',
@@ -41,6 +45,14 @@ require('lazy').setup({
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
+  --  trouble
+   "folke/trouble.nvim",
+   dependencies = { "nvim-tree/nvim-web-devicons" },
+   opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+   },
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -79,8 +91,9 @@ require('lazy').setup({
 
   -- color schemes
   { 'rose-pine/neovim', name = "rose-pine", lazy = false, priority = 1000 },
-  { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
   { 'EdenEast/nightfox.nvim',name = "carbonfox", lazy = false, priority = 1000, },
+  { 'eddyekofo94/gruvbox-flat.nvim',name = "gruvbox-flat", lazy = false, priority = 1000, },
+  { 'tjdevries/gruvbuddy.nvim',name = "gruvbuddy", lazy = false, priority = 1000, },
   { "tjdevries/colorbuddy.nvim", dev = false },
 
   {
@@ -279,7 +292,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settingsfield of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
+  clangd = {},
    gopls = {},
    rust_analyzer = {},
    eslint = {},

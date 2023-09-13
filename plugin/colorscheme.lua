@@ -1,6 +1,3 @@
--- vim.cmd("colorscheme citruszest")
-vim.cmd("colorscheme moonfly")
-
 -- require('rose-pine').setup({
 --   variant = 'auto',
 --   dark_variant = 'main',
@@ -14,6 +11,8 @@ vim.cmd("colorscheme moonfly")
 --   }
 -- })
 -- vim.cmd.colorscheme 'rose-pine'
+
+-- nightfox
 --  local palettes = {
 --    carbonfox = {
 --     bg1 = "#080808",
@@ -33,3 +32,10 @@ vim.cmd("colorscheme moonfly")
 --    specs = specs,
 -- })
 -- vim.cmd.colorscheme 'carbonfox'
+
+-- mellow
+-- vim.cmd("colorscheme mellow")
+
+-- custom gruvbox
+vim.g.gruvbox_flat_style = "hard"
+vim.cmd("colorscheme gruvbox-flat")
