@@ -2,6 +2,12 @@
 -- See `:help mapleader`
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+--
+--
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -44,6 +50,7 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace in the editor.
 --  See :help 'list'
 --  and :help 'listchars'
+-- vim.cmd([[highlight NonText ctermbg=NONE ctermfg=DarkGrey guibg=NONE guifg=DarkGrey]])
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", eol = "↵" }
 
@@ -110,6 +117,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+	"tmsvg/pear-tree",
+	"tjdevries/cyclist.vim",
+	"tjdevries/colorbuddy.vim",
+	"tjdevries/gruvbuddy.nvim",
 
 	-- "gc" to comment visual regions/lines
 	{ "numToStr/Comment.nvim", opts = {} },
@@ -132,7 +143,7 @@ require("lazy").setup({
 		"folke/which-key.nvim",
 		event = "VeryLazy", -- Sets the loading event to 'VeryLazy'
 		config = function() -- This is the function that runs, AFTER loading
-			require("which-key").setup()
+			require("which-key").setup({})
 
 			-- Document existing key chains
 			require("which-key").register({
@@ -334,8 +345,6 @@ require("lazy").setup({
 									"${3rd}/luv/library",
 									unpack(vim.api.nvim_get_runtime_file("", true)),
 								},
-								-- If lua_ls is really slow on your computer, you can try this instead:
-								-- library = { vim.env.VIMRUNTIME },
 							},
 							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 							-- diagnostics = { disable = { 'missing-fields' } },
@@ -343,8 +352,6 @@ require("lazy").setup({
 					},
 				},
 			}
-
-			-- Ensure the servers and tools above are installed
 			--  To check the current status of installed tools and/or manually install
 			--  other tools, you can run
 			--    :Mason
@@ -471,25 +478,21 @@ require("lazy").setup({
 			})
 		end,
 	},
-
 	{ -- You can easily change to a different colorscheme.
-		"projekt0n/github-nvim-theme",
+		"EdenEast/nightfox.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			require("github-theme").setup({
+			require("nightfox").setup({
 				palettes = {
-					github_dark_high_contrast = {
-						bg1 = "#000000",
+					nightfox = {
+						bg1 = "#080808",
 					},
 				},
 			})
-
-			vim.cmd("colorscheme github_dark_high_contrast")
+			vim.cmd("colorscheme nightfox")
 		end,
 	},
-
-	-- Highlight todo, notes, etc in comments
 	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = { signs = false } },
 
 	{ -- Collection of various small independent plugins/modules
