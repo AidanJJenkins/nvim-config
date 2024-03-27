@@ -50,9 +50,8 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace in the editor.
 --  See :help 'list'
 --  and :help 'listchars'
--- vim.cmd([[highlight NonText ctermbg=NONE ctermfg=DarkGrey guibg=NONE guifg=DarkGrey]])
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", eol = "↵" }
+vim.opt.listchars = { tab = "» ", trail = "·", eol = "↵" }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
@@ -478,19 +477,29 @@ require("lazy").setup({
 			})
 		end,
 	},
+	-- { -- You can easily change to a different colorscheme.
+	-- 	"EdenEast/nightfox.nvim",
+	-- 	lazy = false, -- make sure we load this during startup if it is your main colorscheme
+	-- 	priority = 1000, -- make sure to load this before all the other start plugins
+	-- 	config = function()
+	-- 		require("nightfox").setup({
+	-- 			palettes = {
+	-- 				nightfox = {
+	-- 					bg1 = "#080808",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 		vim.cmd("colorscheme nightfox")
+	-- 	end,
+	-- },
+
 	{ -- You can easily change to a different colorscheme.
-		"EdenEast/nightfox.nvim",
+		"mikesmithgh/gruvsquirrel.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			require("nightfox").setup({
-				palettes = {
-					nightfox = {
-						bg1 = "#080808",
-					},
-				},
-			})
-			vim.cmd("colorscheme nightfox")
+			require("gruvsquirrel").setup({})
+			vim.cmd("colorscheme gruvsquirrel")
 		end,
 	},
 	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = { signs = false } },
